@@ -3,11 +3,13 @@ import {RegisterComponent} from "./register/register.component";
 import {LoginComponent} from "./login/login.component";
 import {AuthGuard} from "../core/guards/auth.guard";
 import {LogoutComponent} from "./logout/logout.component";
+import {MainLayoutComponent} from "../main-layout/main-layout.component";
 
 const routes: Routes = [
   {
     path: "user",
     canActivateChild: [AuthGuard],
+    component: MainLayoutComponent,
     children: [
       {
         path: "register",
@@ -25,4 +27,6 @@ const routes: Routes = [
   }
 ]
 
-export const AuthRoutingModule = RouterModule.forChild(routes);
+// @ts-ignore
+export var UserRoutingModule = RouterModule.forChild(routes);
+// @ts-ignore

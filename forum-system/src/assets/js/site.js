@@ -23,3 +23,15 @@ function change() {
   if (elem.value === "Hide list of categories") elem.value = "Show list of categories";
   else elem.value = "Hide list of categories";
 }
+
+function PostAlert() {
+  alert("Please use the ,,Create Post'' link below the desired category :)");
+}
+
+// function Delete(id) {
+//   let r = confirm("Are you sure you want to Delete?");
+//   let json = {id: id};
+//   if (r === true) {
+//
+//   }
+// }
