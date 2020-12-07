@@ -30,7 +30,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let category of categories">
+            <tr *ngFor="let category of categories; trackBy: trackItem">
               <td>{{category.objectId}}</td>
               <td>{{category.title}}</td>
               <td>{{category.description}}</td>
@@ -38,7 +38,7 @@
               <td>0</td>
               <td>
                 <a href="/administration/category/edit/id">Edit</a> |
-                <a href="" onclick="Delete('@item.Id')">Delete</a> |
+                <a href="javascript:void(0)" (click)="delete(category.title, category.objectId)">Delete</a> |
                 <a href="">View Posts</a>
                 <a href="">Create Post</a>
               </td>

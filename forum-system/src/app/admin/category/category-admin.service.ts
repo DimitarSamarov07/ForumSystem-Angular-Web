@@ -25,4 +25,16 @@ export class CategoryAdminService {
     const url = `https://api.backendless.com/${environment.backendless.APP_ID}/${environment.backendless.API_KEY}/data/Categories`
     return await this.http.get<ICategory[]>(url).toPromise()
   }
+
+  public trackItem(index: number, item: ICategory) {
+    return item.objectId;
+  }
+
+  async deleteCategoryById(objectId) {
+    try {
+      await Backendless.Data.of("Categories").remove({objectId});
+    } catch (e) {
+      console.log(e)
+    }
+  }
 }
