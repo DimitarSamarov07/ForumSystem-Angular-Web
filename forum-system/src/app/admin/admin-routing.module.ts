@@ -1,8 +1,11 @@
 import {RouterModule, Routes} from "@angular/router";
 import {GlobalAdminAuthenticationGuard} from "../core/guards/global-admin-authentication.guard";
-import {IndexCategoryComponent} from "./category/index-category/index-category.component";
+import {IndexCategoryAdminComponent} from "./category/index-category-admin/index-category-admin.component";
 import {AdminLayoutComponent} from "./admin-layout/admin-layout.component";
 import {CreateCategoryAdminComponent} from "./category/create-category-admin/create-category-admin.component";
+import {CreatePostAdminComponent} from "./post/create-post-admin/create-post-admin.component";
+import {EditCategoryAdminComponent} from "./category/edit-category-admin/edit-category-admin.component";
+import {ListCategoryPostsAdminComponent} from "./post/list-category-posts-admin/list-category-posts-admin.component";
 
 const routes: Routes = [
   {
@@ -20,17 +23,31 @@ const routes: Routes = [
         children: [
           {
             path: "list",
-            component: IndexCategoryComponent
+            component: IndexCategoryAdminComponent
           },
           {
             path: "create",
             component: CreateCategoryAdminComponent
           },
-          // {
-          //   path: "edit/:id"
-          // }
+          {
+            path: "edit/:categoryId",
+            component: EditCategoryAdminComponent
+          }
         ]
       },
+      {
+        path: "post",
+        children: [
+          {
+            path: "create/:categoryId",
+            component: CreatePostAdminComponent
+          },
+          {
+            path: "list/:categoryId",
+            component: ListCategoryPostsAdminComponent
+          }
+        ]
+      }
     ]
   }
 ]

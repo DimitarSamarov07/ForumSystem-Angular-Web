@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {IndexCategoryComponent} from './index-category.component';
+import {IndexCategoryAdminComponent} from './index-category-admin.component';
 
 describe('IndexCategoryComponent', () => {
-  let component: IndexCategoryComponent;
-  let fixture: ComponentFixture<IndexCategoryComponent>;
+  let component: IndexCategoryAdminComponent;
+  let fixture: ComponentFixture<IndexCategoryAdminComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [IndexCategoryComponent]
+      declarations: [IndexCategoryAdminComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IndexCategoryComponent);
+    fixture = TestBed.createComponent(IndexCategoryAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

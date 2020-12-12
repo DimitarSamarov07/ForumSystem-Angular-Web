@@ -1,0 +1,71 @@
+<section class="content-header">
+  <h1>
+    Categories
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Categories</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+
+        <div class="box-header">
+          <h3 class="box-title">Manage Categories</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <table id="table" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>Id</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Number Of Posts</th>
+              <th>Number of Users</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let category of categories; trackBy: trackItem">
+
+              <td>{{category.objectId}}</td>
+              <td>{{category.title}}</td>
+              <td>{{category.description}}</td>
+              <!--              TODO: implement user and post counter-->
+              <td>0</td>
+              <td>0</td>
+              <td>
+                <a href="javascript:void(0)"
+                   routerLink="/administration/category/edit/{{category.objectId}}">Edit</a> |
+                <a [swal]="deleteSwal" href="javascript:void(0)">Delete</a> |
+                <a href="/administration/post/list/{{category.objectId}}">View Posts</a>
+                <a href="">Create Post</a>
+              </td>
+
+              <swal
+                #deleteSwal
+                position="center"
+                title="Delete {{category.title}}"
+                text="This cannot be undone. Are you sure you want to continue ?"
+                icon="error"
+                [showCancelButton]="true"
+                [focusCancel]="true"
+                (confirm)="delete(category.title, category.objectId)"></swal>
+            </tr>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
+
+<!-- page script -->
+

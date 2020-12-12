@@ -31,7 +31,6 @@ export class CreateCategoryAdminComponent implements OnInit {
   }
 
   async createCategoryOnFormSubmit(form) {
-    debugger;
     if (form.valid) {
       await this.categoryAdminService.createNewCategory(form.value, this.imgFile);
       await this.router.navigateByUrl("/administration/category/list")
