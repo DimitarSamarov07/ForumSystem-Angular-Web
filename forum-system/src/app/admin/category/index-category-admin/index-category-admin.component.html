@@ -42,8 +42,10 @@
                 <a href="javascript:void(0)"
                    routerLink="/administration/category/edit/{{category.objectId}}">Edit</a> |
                 <a [swal]="deleteSwal" href="javascript:void(0)">Delete</a> |
-                <a href="/administration/post/list/{{category.objectId}}">View Posts</a>
-                <a href="">Create Post</a>
+                <a href="javascript:void(0)" routerLink="/administration/post/list/{{category.objectId}}">View Posts</a>
+                |
+                <a href="javascript:void(0)" routerLink="/administration/post/create/{{category.objectId}}">Create
+                  Post</a>
               </td>
 
               <swal

@@ -9,22 +9,35 @@ import {BrowserModule} from "@angular/platform-browser";
 import {CoreModule} from "../core/core.module";
 import {UserModule} from "../user/user.module";
 import {CreateCategoryAdminComponent} from './category/create-category-admin/create-category-admin.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {CreatePostAdminComponent} from './post/create-post-admin/create-post-admin.component';
 import {EditCategoryAdminComponent} from './category/edit-category-admin/edit-category-admin.component';
 import {ListCategoryPostsAdminComponent} from './post/list-category-posts-admin/list-category-posts-admin.component';
+import {EditorModule} from "@tinymce/tinymce-angular";
+import {EditPostAdminComponent} from './post/edit-post-admin/edit-post-admin.component';
 
 @NgModule({
-  declarations: [AdminLayoutComponent, IndexCategoryAdminComponent, MainMenuComponent, CreateCategoryAdminComponent, CreatePostAdminComponent, EditCategoryAdminComponent, ListCategoryPostsAdminComponent],
+  declarations: [
+    AdminLayoutComponent,
+    IndexCategoryAdminComponent,
+    MainMenuComponent,
+    CreateCategoryAdminComponent,
+    CreatePostAdminComponent,
+    EditCategoryAdminComponent,
+    ListCategoryPostsAdminComponent,
+    EditPostAdminComponent
+  ],
   imports: [
     RouterModule,
     AdminRoutingModule,
     BrowserModule,
     CoreModule,
     UserModule,
+    EditorModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     SweetAlert2Module.forRoot()
   ],

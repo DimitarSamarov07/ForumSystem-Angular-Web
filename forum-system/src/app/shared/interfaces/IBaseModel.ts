@@ -1,4 +1,4 @@
 export default interface IBaseModel {
-  created: Date,
+  created: string,
   objectId: string
 }

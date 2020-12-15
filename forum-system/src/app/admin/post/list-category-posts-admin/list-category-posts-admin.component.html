@@ -29,12 +29,14 @@
             </thead>
             <tbody>
 
-            <tr *ngFor="let post of posts">
+            <!--            TODO: Add loading-->
+            <tr *ngFor="let post of posts trackBy: trackItem">
               <td>{{post.objectId}}</td>
               <td>{{post.title}}</td>
-              <td>{{post.created}}</td>
+              <td>{{post.parsedCreated}}</td>
               <td>
-                <a>Edit</a> |
+                <a href="javascript:void(0)"
+                   routerLink="/administration/post/edit/{{post.category.objectId}}/{{post.objectId}}">Edit</a> |
                 <a href="javascript:void(0)" routerLink="/administration/post/delete/{{post.objectId}}"
                    (click)="onDeletePostClick(post.objectId)">Delete</a> |
                 <!--                TODO: Add link to forum-->

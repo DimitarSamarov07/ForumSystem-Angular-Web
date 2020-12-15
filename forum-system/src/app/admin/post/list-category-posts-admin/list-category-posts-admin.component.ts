@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import IPost from "../../../shared/interfaces/IPost";
 import {PostAdminService} from "../post-admin.service";
 import {ActivatedRoute} from "@angular/router";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-list-category-posts-admin',
@@ -11,17 +12,23 @@ import {ActivatedRoute} from "@angular/router";
 export class ListCategoryPostsAdminComponent implements OnInit {
 
   public categoryName: string;
-  private categoryId: string;
+  private readonly categoryId: string;
   public posts: IPost[];
 
   constructor(private postAdminService: PostAdminService, private activatedRoute: ActivatedRoute) {
+    this.categoryId = this.activatedRoute.snapshot.params.categoryId;
   }
 
   async ngOnInit() {
-    this.posts = await this.postAdminService.retrievePostsFromCategory(this.activatedRoute.snapshot.params.categoryId);
+    this.posts = await this.postAdminService.retrievePostsFromCategory(this.categoryId);
+    this.posts.forEach(x => x.parsedCreated = moment(x.created).format("DD/MM/YYYY"))
   }
 
-  onDeletePostClick(postId: string) {
+  public trackItem(index: number, item: IPost) {
+    return item.objectId;
+  }
 
+  async onDeletePostClick(postId: string) {
+    await this.postAdminService.deletePost(postId);
   }
 }

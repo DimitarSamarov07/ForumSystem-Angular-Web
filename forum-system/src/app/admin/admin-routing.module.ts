@@ -6,6 +6,7 @@ import {CreateCategoryAdminComponent} from "./category/create-category-admin/cre
 import {CreatePostAdminComponent} from "./post/create-post-admin/create-post-admin.component";
 import {EditCategoryAdminComponent} from "./category/edit-category-admin/edit-category-admin.component";
 import {ListCategoryPostsAdminComponent} from "./post/list-category-posts-admin/list-category-posts-admin.component";
+import {EditPostAdminComponent} from "./post/edit-post-admin/edit-post-admin.component";
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
           {
             path: "list/:categoryId",
             component: ListCategoryPostsAdminComponent
+          },
+          {
+            path: "edit/:categoryId/:postId",
+            component: EditPostAdminComponent
           }
         ]
       }
