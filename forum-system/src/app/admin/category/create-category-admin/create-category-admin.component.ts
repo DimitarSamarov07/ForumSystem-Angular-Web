@@ -12,6 +12,7 @@ export class CreateCategoryAdminComponent implements OnInit {
 
   form: FormGroup;
   private imgFile;
+  imgRequiredErr = false;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -27,14 +28,18 @@ export class CreateCategoryAdminComponent implements OnInit {
 
   registerPhoto(event) {
     this.imgFile = event.target.files[0];
+    this.imgRequiredErr = false;
     console.log(this.imgFile, "registerPhoto")
   }
 
   async createCategoryOnFormSubmit(form) {
-    if (form.valid) {
+    if (form.valid && this.imgFile) {
       await this.categoryAdminService.createNewCategory(form.value, this.imgFile);
       await this.router.navigateByUrl("/administration/category/list")
     } else {
+      if (!this.imgFile) {
+        this.imgRequiredErr = true;
+      }
       this.form.markAllAsTouched();
     }
   }

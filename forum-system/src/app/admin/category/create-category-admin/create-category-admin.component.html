@@ -38,6 +38,7 @@
           <label class="col-sm-2 control-label" for="image">Upload Forum Image</label>
           <br/>
           <input type="file" id="image" class="btn btn-dark" (change)="registerPhoto($event)"/>
+          <span class="text-danger" *ngIf="imgRequiredErr">Image is required.</span>
           <br/>
 
           <p class="text-danger">Make sure to use high-resolution images with aspect ratio 16:9</p>
