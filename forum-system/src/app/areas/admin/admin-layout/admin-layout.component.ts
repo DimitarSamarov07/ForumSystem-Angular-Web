@@ -7,6 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AdminLayoutComponent implements OnInit {
 
+  //TODO: IMPORTANT!!!! FIX SCRIPTS AND HEAD LINKS
   constructor() {
   }
 

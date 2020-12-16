@@ -1,5 +1,5 @@
 import {RouterModule, Routes} from "@angular/router";
-import {GlobalAdminAuthenticationGuard} from "../core/guards/global-admin-authentication.guard";
+import {GlobalAdminAuthenticationGuard} from "../../core/guards/global-admin-authentication.guard";
 import {IndexCategoryAdminComponent} from "./category/index-category-admin/index-category-admin.component";
 import {AdminLayoutComponent} from "./admin-layout/admin-layout.component";
 import {CreateCategoryAdminComponent} from "./category/create-category-admin/create-category-admin.component";

@@ -11,11 +11,10 @@ export class AuthGuard implements CanActivateChild {
   async canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const url = state.url;
     if (url.includes("logout")){
+      await this.router.navigateByUrl("/")
       return true;
     }
-    const result = !await this.userService.verifyIfUserIsLoggedIn();
-    console.log(result);
-    return result;
+    return !await this.userService.verifyIfUserIsLoggedIn();
   }
 
 }

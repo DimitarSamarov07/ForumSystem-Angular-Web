@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import IPost from "../../shared/interfaces/IPost";
+import IPost from "../../../shared/interfaces/IPost";
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostAdminService {
+export class PostService {
 
   private postStore = Backendless.Data.of("Posts");
 
@@ -25,11 +25,9 @@ export class PostAdminService {
   }
 
   async retrievePost(postId) {
-    debugger;
     const loadRelation = await Backendless.LoadRelationsQueryBuilder.create().setRelationName("category");
     const post = await this.postStore.findById(postId);
     const category = await this.postStore.loadRelations<IPost>(postId, loadRelation)
-    debugger;
 
     Object.assign(post, {category: category[0]})
 
@@ -41,7 +39,6 @@ export class PostAdminService {
   }
 
   async editPost({title, content}, postId) {
-    debugger;
     const post = await this.retrievePost(postId)
     Object.assign(post, {title, content});
     await this.postStore.save(post);

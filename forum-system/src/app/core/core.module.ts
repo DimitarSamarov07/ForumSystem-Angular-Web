@@ -10,7 +10,8 @@ import {RouterModule} from "@angular/router";
   exports: [HeaderComponent, FooterComponent],
   imports: [
     RouterModule
-  ]
+  ],
+  bootstrap: [HeaderComponent, FooterComponent]
 })
 export class CoreModule {
 }

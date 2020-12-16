@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import IPost from "../../../shared/interfaces/IPost";
-import {PostAdminService} from "../post-admin.service";
+import IPost from "../../../../shared/interfaces/IPost";
+import {PostService} from "../../../global/posts/post.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
@@ -12,12 +12,12 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class EditPostAdminComponent implements OnInit {
 
   post: IPost;
-  form: FormGroup
+  form: FormGroup;
   postId: string;
   categoryId: string;
   isDataReady = false;
 
-  constructor(private postService: PostAdminService,
+  constructor(private postService: PostService,
               private activatedRoute: ActivatedRoute,
               private fb: FormBuilder,
               private router: Router) {

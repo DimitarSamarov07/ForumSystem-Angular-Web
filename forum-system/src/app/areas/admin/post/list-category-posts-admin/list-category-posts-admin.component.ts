@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import IPost from "../../../shared/interfaces/IPost";
-import {PostAdminService} from "../post-admin.service";
+import IPost from "../../../../shared/interfaces/IPost";
+import {PostService} from "../../../global/posts/post.service";
 import {ActivatedRoute} from "@angular/router";
 import * as moment from 'moment';
 
@@ -15,7 +15,7 @@ export class ListCategoryPostsAdminComponent implements OnInit {
   private readonly categoryId: string;
   public posts: IPost[];
 
-  constructor(private postAdminService: PostAdminService, private activatedRoute: ActivatedRoute) {
+  constructor(private postAdminService: PostService, private activatedRoute: ActivatedRoute) {
     this.categoryId = this.activatedRoute.snapshot.params.categoryId;
   }
 

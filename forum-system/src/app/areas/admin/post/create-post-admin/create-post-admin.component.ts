@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {PostAdminService} from "../post-admin.service";
+import {PostService} from "../../../global/posts/post.service";
 
 @Component({
   selector: 'app-create-post-admin',
@@ -14,7 +14,7 @@ export class CreatePostAdminComponent implements OnInit {
   categoryId: string;
 
   constructor(private fb: FormBuilder,
-              private postService: PostAdminService,
+              private postService: PostService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
     this.form = this.fb.group({
