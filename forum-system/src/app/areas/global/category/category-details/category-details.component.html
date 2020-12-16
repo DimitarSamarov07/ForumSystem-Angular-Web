@@ -1,0 +1,100 @@
+<ng-container *ngIf="category">
+  <h1>Welcome to the {{category.title}} category</h1>
+  <div class="align-content-stretch"><img id="borderimage" src="{{category.imageUrl}}" width="553" height="310"/></div>
+  <br/>
+
+
+  <!--if is authenticated-->
+  <div class="row">
+    <h3><a class="btn btn-primary" routerLink="/post/create"> New Post</a></h3>
+
+  </div>
+
+  <!--else-->
+
+  <p class="text-muted">
+    You must be a registered user to add new posts.
+    <a class="text-dark" routerLink="/user/login">Login</a> or
+    <a class="text-dark" routerLink="/user/register">Register</a>
+    now.
+  </p>
+
+
+  <!--if any posts-->
+  <div>
+    <form #f="ngForm" [formGroup]="searchForm" (ngSubmit)="onSearchFormSubmit(f)">
+      <div class="row">
+        <div class="col-10">
+          <input class="form-control" formControlName="query" type="text" placeholder="Search this forum"
+                 (focus)="clearThis(this)"/>
+        </div>
+        <div class="col-2">
+          <button type="submit" class="btn btn-block btn-outline-primary"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <br/>
+  <ng-container *ngIf="category.posts?.length && category.posts?.length === 0 then noPosts"></ng-container>
+  <table class="table table-bordered table-hover" *ngIf="category?.posts?.length > 0">
+
+    <tbody>
+    <tr *ngFor="let post of category.posts; trackBy: trackItem">
+      <td>
+        <div>
+          <div style="font-size: 1.5em"><a routerLink="/post/{{post.objectId}}}">{{post.title}}</a></div>
+          <div>
+            <h6 style="margin-bottom: 0;">by</h6>
+
+            <a *ngIf="post.author.isAdmin else normalUser" class="badge badge-dark" href="javascript:void(0)"
+               routerLink="/profile/user/{{post.author.objectId}}">{{post.author.username}}</a>
+
+
+            <ng-template #normalUser>
+              <a class="badge badge-success" href="javascript:void(0)"
+                 routerLink="/profile/user/{{post.author.objectId}}">{{post.author.username}}</a>
+            </ng-template>
+          </div>
+          <div><em>Posted on: <b>{{getConvertedDate(category.created)}}</b></em></div>
+
+
+          <!--replies count = 0-->
+          <div>No replies</div>
+
+          <!--          TODO: Implement replies counter-->
+
+          <!--          &lt;!&ndash;replies count = 1&ndash;&gt;-->
+          <!--          <div>1 reply</div>-->
+
+          <!--          &lt;!&ndash;replies count > 1&ndash;&gt;-->
+
+          <!--          <div>@post.RepliesCount replies</div>-->
+
+
+        </div>
+      </td>
+    </tr>
+
+    </tbody>
+
+  </table>
+
+
+  <!--paginator-->
+
+  <mat-paginator
+    (page)="onPaginatorEvent($event)"
+    [length]="totalDataLength"
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    pageSize="10">>
+  </mat-paginator>
+
+  <!--else-->
+  <ng-template #noPosts>
+    <div class="text-center ">
+      <h2>There are no posts in this forum</h2>
+    </div>
+  </ng-template>
+</ng-container>
+

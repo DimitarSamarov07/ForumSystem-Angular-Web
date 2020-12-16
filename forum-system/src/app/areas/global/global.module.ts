@@ -4,14 +4,17 @@ import {GlobalRoutingModule} from "./global.routing.module";
 import {CategoryIndexComponent} from "./category/category-index/category-index.component";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {CommonModule} from "@angular/common";
+import {CategoryDetailsComponent} from "./category/category-details/category-details.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
-  declarations: [CategoryIndexComponent],
+  declarations: [CategoryIndexComponent, CategoryDetailsComponent],
   imports: [
     CoreModule,
     GlobalRoutingModule,
     MatPaginatorModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   exports: []
 })
