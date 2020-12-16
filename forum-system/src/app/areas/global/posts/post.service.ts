@@ -20,6 +20,17 @@ export class PostService {
     return await this.postStore.find<IPost>(queryBuilder);
   }
 
+  async getAllPosts(): Promise<IPost[]> {
+    return await this.postStore.find<IPost>({});
+  }
+
+  async getLatestNPosts(n: number): Promise<IPost[]> {
+    const query = Backendless.DataQueryBuilder.create().setPageSize(n).setRelated("author");
+    const posts = await this.postStore.find<IPost>(query);
+
+    return posts.sort((a, b) => (new Date(b.created)).getTime() - (new Date(a.created)).getTime())
+  }
+
   async getCountOfCategoryPosts(categoryId) {
     const queryBuilder = Backendless.DataQueryBuilder.create().setWhereClause(`category = '${categoryId}'`);
     return await this.postStore.getObjectCount(queryBuilder)

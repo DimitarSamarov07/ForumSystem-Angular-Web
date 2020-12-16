@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import ICategory from "../shared/interfaces/ICategory";
+import {PostService} from "../areas/global/posts/post.service";
+import {CategoryService} from "../areas/global/category/category.service";
+import IPost from "../shared/interfaces/IPost";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +11,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  categories: ICategory[];
+  latestPosts: IPost[];
+  mostPopularPosts: IPost[];
 
-  ngOnInit(): void {
+  constructor(private postService: PostService,
+              private categoryService: CategoryService) {
+  }
+
+  async ngOnInit() {
+    this.categories = await this.categoryService.getNCategories(10);
+    this.latestPosts = await this.postService.getLatestNPosts(10);
   }
 
 }

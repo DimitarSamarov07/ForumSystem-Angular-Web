@@ -24,24 +24,25 @@
 
 
     <table class="table table-bordered table-hover text-left">
-      <tr>
+      <tr *ngFor="let category of categories">
         <td>
           <div class="row">
-            <div class="col-1 text-center"><img src="" style="width: 40px"/></div>
+            <div class="col-1 text-center"><img src="{{category.imageUrl}}" style="width: 40px"/></div>
             <div class="col-10 ">
               <a style="font-size: 1.5em">
+                {{category.title}}
               </a>
 
-
-              <div class="badge badge-success">New</div>
+              <div *ngIf="category.isRecentCategory" class="badge badge-success">New</div>
               <br/>
 
+              {{category.description}}
               <div class="text-muted">
-
+                2 Posts by
+                2 Users
               </div>
 
               <br/>
-              <a>Delete</a>
 
             </div>
 
@@ -68,22 +69,20 @@
         <tr></tr>
         </thead>
         <tbody>
-        <tr>
+        <tr *ngFor="let post of latestPosts">
           <td>
-            <div><a>Random Post</a></div>
+            <div><a>{{post.title}}</a></div>
             <div>
               <h6 style="margin-bottom: 0;">by</h6>
 
-              <a class="badge badge-dark">Greg</a>
-
-
-              <a>Greg</a>
+              <a *ngIf="post.author.isAdmin" class="author-name badge badge-dark">{{post.author.username}}</a>
+              <a *ngIf="!post.author.isAdmin" class="author-name badge badge-success">{{post.author.username}}</a>
 
             </div>
             <div class="text-muted">
-              <span>1 Reply</span>
+              <!--              <span>1 Reply</span>-->
               <span>No replies</span>
-              <span>2 Replies</span>
+              <!--              <span>2 Replies</span>-->
             </div>
 
 
@@ -101,6 +100,7 @@
       <table class="table table-hover">
 
 
+        <!--        TODO: Implement most popular posts-->
         <thead>
         <tr><h3> Most popular posts</h3></tr>
         </thead>
@@ -111,10 +111,10 @@
             <div>
               <h6 style="margin-bottom: 0;">by</h6>
 
-              <a class="badge badge-dark">Greg</a>
+              <a class="author-name badge badge-dark">Greg</a>
 
 
-              <a class="badge badge-success">Greg</a>
+              <a class="author-name badge badge-success">Greg</a>
 
 
             </div>

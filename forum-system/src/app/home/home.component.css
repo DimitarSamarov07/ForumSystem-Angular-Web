@@ -1,0 +1,3 @@
+.author-name:not([href]):not([tabindex]) {
+  color: #ffffff !important;
+}

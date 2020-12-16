@@ -24,6 +24,16 @@ export class CategoryService {
     return await this.http.get<ICategory[]>(url).toPromise()
   }
 
+  async getNCategories(n): Promise<ICategory[]> {
+    const query = Backendless.DataQueryBuilder.create().setPageSize(n);
+    const result = await this.categoryStore.find<ICategory>(query);
+
+    const recentPostReferenceDate = moment().add(-24, "hours");
+    result.forEach((x) => x.isRecentCategory = moment(x.created).toDate() > recentPostReferenceDate.toDate());
+
+    return result;
+  }
+
   async retrievePaginatedCategories(page?, itemsPerPage?): Promise<ICategory[]> {
     return await this.getPaginatorData(page, itemsPerPage);
   }
