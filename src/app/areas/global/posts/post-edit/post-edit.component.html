@@ -1,0 +1,27 @@
+<ng-container *ngIf="post">
+  <h1>Editing post with title <b>{{post.title}}</b></h1>
+  <form #f="ngForm" [formGroup]="form" (ngSubmit)="onFormSubmit(f)">
+    <div class="form-group">
+      <label for="mytextarea">Content</label>
+      <editor
+        id="mytextarea"
+        formControlName="content"
+        apiKey="m3edqqp0ax7sg5r2fjilwhp1003m8da5o44echmgnzus5ajm"
+        [init]="{
+     height: 500,
+     menubar: false,
+     plugins: [
+       'advlist autolink lists link image charmap print preview anchor',
+       'searchreplace visualblocks code fullscreen',
+       'insertdatetime media table paste code help wordcount'
+     ],
+
+     toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment'
+   }"></editor>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="reset" class="btn btn-danger">Reset</button>
+    <p class="text-danger">Note: You can't edit the post's title</p>
+  </form>
+
+</ng-container>
