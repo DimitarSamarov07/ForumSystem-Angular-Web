@@ -111,7 +111,7 @@ img {
 /*end reset*/
 body {
   font-family: "Century Gothic" Geneva Helvetica, sans-serif;
-  background: url('../../assets/images/error/bg.png');
+  background: url('../../../assets/images/error/bg.png');
 }
 
 .wrap {
