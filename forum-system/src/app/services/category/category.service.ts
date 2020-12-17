@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import ICategory from "../../../shared/interfaces/ICategory";
-import {environment} from "../../../../environments/environment";
-import {CloudinaryService} from "../../../cloudinary.service";
+import ICategory from "../../shared/interfaces/ICategory";
+import {environment} from "../../../environments/environment";
+import {CloudinaryService} from "../shared/cloudinary.service";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import * as moment from 'moment';

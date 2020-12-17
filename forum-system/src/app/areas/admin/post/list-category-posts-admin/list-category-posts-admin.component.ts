@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import IPost from "../../../../shared/interfaces/IPost";
-import {PostService} from "../../../global/posts/post.service";
+import {PostService} from "../../../../services/post/post.service";
 import {ActivatedRoute} from "@angular/router";
 import * as moment from 'moment';
 

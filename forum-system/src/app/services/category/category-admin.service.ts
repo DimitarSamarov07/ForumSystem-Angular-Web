@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {CloudinaryService} from "../../../cloudinary.service";
+import {CloudinaryService} from "../shared/cloudinary.service";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {CategoryService} from "../../global/category/category.service";
+import {CategoryService} from "./category.service";
 
 @Injectable({
   providedIn: 'root'

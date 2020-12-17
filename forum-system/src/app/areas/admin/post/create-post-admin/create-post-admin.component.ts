@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {PostService} from "../../../global/posts/post.service";
+import {PostService} from "../../../../services/post/post.service";
 
 @Component({
   selector: 'app-create-post-admin',

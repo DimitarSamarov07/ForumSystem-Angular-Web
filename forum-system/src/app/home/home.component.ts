@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import ICategory from "../shared/interfaces/ICategory";
-import {PostService} from "../areas/global/posts/post.service";
-import {CategoryService} from "../areas/global/category/category.service";
+import {PostService} from "../services/post/post.service";
+import {CategoryService} from "../services/category/category.service";
 import IPost from "../shared/interfaces/IPost";
 
 @Component({

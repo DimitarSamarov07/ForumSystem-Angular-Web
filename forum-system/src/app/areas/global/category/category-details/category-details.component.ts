@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {PostService} from "../../posts/post.service";
+import {PostService} from "../../../../services/post/post.service";
 import IPost from "../../../../shared/interfaces/IPost";
 import ICategoryDetailsList from "../../../../shared/interfaces/ICategoryDetailsList";
 import {ActivatedRoute} from "@angular/router";

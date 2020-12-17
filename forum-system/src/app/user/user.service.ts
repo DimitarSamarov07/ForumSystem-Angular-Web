@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import IUser from "../shared/interfaces/IUser";
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +26,15 @@ export class UserService {
       if (!userData.rememberMe) {
         userData.rememberMe = false;
       }
-      const result = await Backendless.UserService.login(userData.username, userData.password, true);
+      await Backendless.UserService.login(userData.username, userData.password, true);
       return true;
     } catch (e) {
       return false;
     }
+  }
+
+  async getCurrUser(): Promise<IUser> {
+    return await Backendless.UserService.getCurrentUser<IUser>();
   }
 
   async logoutUser(): Promise<void> {

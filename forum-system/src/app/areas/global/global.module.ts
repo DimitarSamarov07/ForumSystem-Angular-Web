@@ -6,9 +6,10 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {CommonModule} from "@angular/common";
 import {CategoryDetailsComponent} from "./category/category-details/category-details.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {PostDetailsComponent} from "./posts/post-details/post-details.component";
 
 @NgModule({
-  declarations: [CategoryIndexComponent, CategoryDetailsComponent],
+  declarations: [CategoryIndexComponent, CategoryDetailsComponent, PostDetailsComponent],
   imports: [
     CoreModule,
     GlobalRoutingModule,

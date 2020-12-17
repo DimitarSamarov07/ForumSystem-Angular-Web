@@ -5,11 +5,11 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UserAreaGuard implements CanActivateChild {
+export class GlobalAreaAuthGuard implements CanActivateChild {
   canActivateChild(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    return Backendless.UserService.isValidLogin();
   }
 
 }

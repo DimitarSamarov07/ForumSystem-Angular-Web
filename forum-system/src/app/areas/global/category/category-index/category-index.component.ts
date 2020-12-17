@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import ICategory from "../../../../shared/interfaces/ICategory";
-import {CategoryService} from "../category.service";
+import {CategoryService} from "../../../../services/category/category.service";
 import {PageEvent} from "@angular/material/paginator";
 
 @Component({

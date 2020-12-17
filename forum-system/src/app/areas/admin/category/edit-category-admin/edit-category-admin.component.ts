@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {CategoryAdminService} from "../category-admin.service";
+import {CategoryAdminService} from "../../../../services/category/category-admin.service";
 import ICategory from "../../../../shared/interfaces/ICategory";
 
 @Component({

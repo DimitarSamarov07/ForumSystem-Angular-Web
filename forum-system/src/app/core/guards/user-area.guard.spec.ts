@@ -1,13 +1,13 @@
 import {TestBed} from '@angular/core/testing';
 
-import {UserAreaGuard} from './user-area.guard';
+import {GlobalAreaAuthGuard} from './global-area-auth-guard.service';
 
 describe('UserAreaGuard', () => {
-  let guard: UserAreaGuard;
+  let guard: GlobalAreaAuthGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(UserAreaGuard);
+    guard = TestBed.inject(GlobalAreaAuthGuard);
   });
 
   it('should be created', () => {

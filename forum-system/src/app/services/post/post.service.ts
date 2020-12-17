@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import IPost from "../../../shared/interfaces/IPost";
-import ICategoryDetailsList from "../../../shared/interfaces/ICategoryDetailsList";
+import IPost from "../../shared/interfaces/IPost";
+import ICategoryDetailsList from "../../shared/interfaces/ICategoryDetailsList";
 
 @Injectable({
   providedIn: 'root'
@@ -58,13 +58,8 @@ export class PostService {
   }
 
   async retrievePost(postId) {
-    const loadRelation = await Backendless.LoadRelationsQueryBuilder.create().setRelationName("category");
-    const post = await this.postStore.findById(postId);
-    const category = await this.postStore.loadRelations<IPost>(postId, loadRelation)
-
-    Object.assign(post, {category: category[0]})
-
-    return post as IPost;
+    const query = await Backendless.DataQueryBuilder.create().setRelated(["author", "category"]);
+    return await this.postStore.findById<IPost>(postId, query);
   }
 
   async deletePost(postId) {

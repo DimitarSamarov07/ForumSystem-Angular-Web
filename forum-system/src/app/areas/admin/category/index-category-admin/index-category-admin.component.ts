@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, Renderer2} from '@angular/core';
 import ICategory from "../../../../shared/interfaces/ICategory";
-import {CategoryAdminService} from "../category-admin.service";
+import {CategoryAdminService} from "../../../../services/category/category-admin.service";
 import {DOCUMENT} from "@angular/common";
 
 @Component({
