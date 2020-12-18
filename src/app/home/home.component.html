@@ -28,7 +28,8 @@
           <div class="row">
             <div class="col-1 text-center"><img src="{{category.imageUrl}}" style="width: 40px"/></div>
             <div class="col-10 ">
-              <a style="font-size: 1.5em">
+              <a style="font-size: 1.5em" href="javascript:void(0)"
+                 routerLink="/category/details/{{category.objectId}}">
                 {{category.title}}
               </a>
 
@@ -70,12 +71,14 @@
         <tbody>
         <tr *ngFor="let post of latestPosts">
           <td>
-            <div><a>{{post.title}}</a></div>
+            <div><a href="javascript:void(0)" routerLink="/post/details/{{post.objectId}}">{{post.title}}</a></div>
             <div>
               <h6 style="margin-bottom: 0;">by</h6>
 
-              <a *ngIf="post.author.isAdmin" class="author-name badge badge-dark">{{post.author.username}}</a>
-              <a *ngIf="!post.author.isAdmin" class="author-name badge badge-success">{{post.author.username}}</a>
+              <a href="javascript:void(0)" routerLink="/profile/{{post.author.username}}" *ngIf="post.author.isAdmin"
+                 class="author-name badge badge-dark">{{post.author.username}}</a>
+              <a href="javascript:void(0)" routerLink="/profile/{{post.author.username}}" *ngIf="!post.author.isAdmin"
+                 class="author-name badge badge-success">{{post.author.username}}</a>
 
             </div>
             <div class="text-muted">
