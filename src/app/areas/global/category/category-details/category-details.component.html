@@ -58,18 +58,9 @@
           </div>
           <div><em>Posted on: <b>{{getConvertedDate(category.created)}}</b></em></div>
 
-
-          <!--replies count = 0-->
-          <div>No replies</div>
-
-          <!--          TODO: Implement replies counter-->
-
-          <!--          &lt;!&ndash;replies count = 1&ndash;&gt;-->
-          <!--          <div>1 reply</div>-->
-
-          <!--          &lt;!&ndash;replies count > 1&ndash;&gt;-->
-
-          <!--          <div>@post.RepliesCount replies</div>-->
+          <div *ngIf="post.repliesCount === 0">No replies</div>
+          <div *ngIf="post.repliesCount === 1">1 reply</div>
+          <div *ngIf="post.repliesCount >= 2">{{post.repliesCount}} replies</div>
 
 
         </div>

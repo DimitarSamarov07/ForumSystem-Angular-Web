@@ -32,10 +32,7 @@ export class PostService {
     const posts = await this.postStore.find<IPost>(query);
 
     for (const post of posts) {
-      const replyClause = `post = '${post.objectId}'`
-      const replyQuery = Backendless.DataQueryBuilder.create().setWhereClause(replyClause);
-
-      post.repliesCount = await this.replyStore.getObjectCount(replyQuery);
+      post.repliesCount = await this.getPostRepliesCount(post.objectId);
     }
 
     return posts.sort((a, b) => (new Date(b.created)).getTime() - (new Date(a.created)).getTime())
@@ -56,7 +53,11 @@ export class PostService {
       .setPageSize(objPerPage);
 
     const category = await this.categoryStore.findById(categoryId);
-    const posts = await this.postStore.find(queryBuilder);
+    const posts = await this.postStore.find<IPost>(queryBuilder);
+
+    for (const post of posts) {
+      post.repliesCount = await this.getPostRepliesCount(post.objectId)
+    }
 
     return {...category, posts} as ICategoryDetailsList;
   }
@@ -66,6 +67,13 @@ export class PostService {
     await this.postStore.setRelation(newPost, "author", [{objectId: userId}]);
     await this.postStore.setRelation(newPost, "category", [{objectId: category}])
     return newPost.objectId;
+  }
+
+  async getPostRepliesCount(postId) {
+    const replyClause = `post = '${postId}'`
+    const replyQuery = Backendless.DataQueryBuilder.create().setWhereClause(replyClause);
+
+    return this.replyStore.getObjectCount(replyQuery);
   }
 
   async retrievePost(postId) {
@@ -101,10 +109,6 @@ export class PostService {
     await this.postStore.save(post)
   }
 
-  private static async calculateOffset(page, objPerPage) {
-    // const queryBuilder = Backendless.DataQueryBuilder.create().setOffset(offset).setPageSize(objPerPage);
-    return objPerPage * page;
-  }
 
   async getNMostPopularPosts(n: number) {
     const postQuery = Backendless.DataQueryBuilder.create().setRelated("author")
@@ -112,11 +116,14 @@ export class PostService {
     const posts = await this.postStore.find<IPost>(postQuery)
 
     for (const post of posts) {
-      const clause = `post = '${post.objectId}'`;
-      const query = Backendless.DataQueryBuilder.create().setWhereClause(clause);
-      post.repliesCount = await this.replyStore.getObjectCount(query);
+      post.repliesCount = await this.getPostRepliesCount(post.objectId);
     }
 
     return posts.sort((a, b) => b.repliesCount - a.repliesCount).slice(0, n)
+  }
+
+  private static async calculateOffset(page, objPerPage) {
+    // const queryBuilder = Backendless.DataQueryBuilder.create().setOffset(offset).setPageSize(objPerPage);
+    return objPerPage * page;
   }
 }

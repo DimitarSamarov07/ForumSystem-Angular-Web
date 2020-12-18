@@ -86,7 +86,7 @@
 
               <span *ngIf="post.repliesCount === 0">No replies</span>
               <span *ngIf="post.repliesCount === 1">1 Reply</span>
-              <span *ngIf="post.repliesCount >= 2">2 Replies</span>
+              <span *ngIf="post.repliesCount >= 2">{{post.repliesCount}} Replies</span>
             </div>
 
 
@@ -124,7 +124,7 @@
 
               <span *ngIf="post.repliesCount === 0">No replies</span>
               <span *ngIf="post.repliesCount === 1">1 Reply</span>
-              <span *ngIf="post.repliesCount >= 2">2 Replies</span>
+              <span *ngIf="post.repliesCount >= 2">{{post.repliesCount}} Replies</span>
 
 
             </div>
