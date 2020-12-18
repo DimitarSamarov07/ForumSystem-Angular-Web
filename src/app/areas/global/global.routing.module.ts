@@ -8,6 +8,7 @@ import {PostCreateComponent} from "./post/post-create/post-create.component";
 import {PostEditComponent} from "./post/post-edit/post-edit.component";
 import {CreateReplyComponent} from "./reply/create-reply/create-reply.component";
 import {GlobalAuthenticationCanActivateGuard} from "../../core/guards/global-authentication-can-activate.guard";
+import {EditReplyComponent} from "./reply/edit-reply/edit-reply.component";
 
 const routes: Routes = [
   {
@@ -52,6 +53,10 @@ const routes: Routes = [
       {
         path: "create/:postId",
         component: CreateReplyComponent,
+      },
+      {
+        path: "edit/:replyId",
+        component: EditReplyComponent
       }
     ]
   }

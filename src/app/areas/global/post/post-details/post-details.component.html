@@ -6,8 +6,8 @@
 
   <div class="card">
 
-    <ng-container *ngIf="isCurrUserAuthor && !currUser.isAdmin then authorEdit"></ng-container>
-    <ng-container *ngIf="currUser.isAdmin then adminEdit"></ng-container>
+    <ng-container *ngIf="isCurrUserAuthor && !currUser?.isAdmin then authorEdit"></ng-container>
+    <ng-container *ngIf="currUser?.isAdmin then adminEdit"></ng-container>
 
     <ng-template #authorEdit>
       <a class="btn btn-custom-post" routerLink="/post/edit/{{post.objectId}}" href="javascript:void(0)"><i
@@ -26,7 +26,7 @@
 
         <br/>
         <a href="javascript:void(0)">{{post.author.username}}</a>
-        <ng-container *ngIf="currUser.isAdmin then adminBadge else normalUserBadge"></ng-container>
+        <ng-container *ngIf="post.author.isAdmin then adminBadge else normalUserBadge"></ng-container>
 
         <ng-template #adminBadge>
           <br/>
@@ -34,6 +34,7 @@
         </ng-template>
 
         <ng-template #normalUserBadge>
+          <br/>
           <p class="badge badge-success" style="width: 70px;">{{post.author.username}}</p>
           <br/>
         </ng-template>
@@ -48,7 +49,7 @@
 
       </div>
     </div>
-    <div class="card-footer text-muted">
+    <div class="card-footer text-muted" *ngIf="currUser">
       Posted on: {{post.parsedCreated}}
       <div>
         <a href="javascript:void(0)" (click)="sendVote(true)">
@@ -56,7 +57,6 @@
         </a>
       </div>
 
-      <!--      TODO: Implement vote counter-->
       <div id="votesCount">{{votesCount}}</div>
       <div>
         <a href="javascript:void(0)" (click)="sendVote(false)">
@@ -67,114 +67,83 @@
   </div>
 
   <br/>
+
+
+  <ng-container *ngIf="post.replies.length > 0 else noReplies">
+    <b style="font-size: 30px">Replies:</b>
+    <ng-container *ngFor="let reply of post.replies">
+      <br/>
+
+      <div class="card">
+
+        <a *ngIf="reply.author.objectId === currUser.objectId" class="btn btn-custom-post" href="javascript:void(0)"
+           routerLink="/reply/edit/{{reply.objectId}}"><i
+          class="fa fa-edit"> Edit</i></a>
+
+        <div class="card-body row">
+          <div class="col-2 text-center">
+            <img src="{{reply.author.profileImageUrl}}" class="img-circle-post"/>
+            <br/>
+
+            <a href="javascript:void(0)" routerLink="/profile/{{reply.author.username}}">{{reply.author.username}}</a>
+            <ng-container *ngIf="reply.author.isAdmin else normalUser">
+              <br/>
+              <p class="badge badge-dark" style="width: 60px;">Admin</p>
+              <br/>
+            </ng-container>
+
+            <ng-template #normalUser>
+              <p class="badge badge-success" style="width: 60px;">User</p>
+              <br/>
+            </ng-template>
+
+            Points:
+            {{reply.author.karmaPoints}}
+
+          </div>
+          <div class="col-10">
+
+            <p class="card-text" [innerHTML]="reply.content"></p>
+
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          Posted on: {{reply.parsedCreated}}
+        </div>
+
+        <div class="text-muted small ml-3">
+
+        </div>
+      </div>
+
+
+    </ng-container>
+
+  </ng-container>
+
+  <ng-template #noReplies>
+    <div class="text-center text-primary">
+      <h3>There are no replies to this post</h3>
+    </div>
+  </ng-template>
+
+  <br/>
+
+
+  <ng-container *ngIf="currUser else notAuthenticated">
+    <div class="row">
+      <span><a class="btn btn-dark" href="javascript:void(0)"
+               routerLink="/reply/create/{{postId}}">Add a Reply</a></span>
+    </div>
+  </ng-container>
+
+
+  <ng-template #notAuthenticated>
+    <p class="text-center text-dark">
+      You must be a registered user to add a reply.
+      <a class="text-primary" href="javascript:void(0)" routerLink="/user/login">Login</a> or
+      <a class="text-primary" href="javascript:void(0)" routerLink="/user/register">Register</a>
+      now.
+    </p>
+  </ng-template>
 </ng-container>
-
-
-<!--@if (Model.Replies.Any())-->
-<!--{-->
-<!--<b style="font-size: 30px">Replies:</b>-->
-<!--foreach (var reply in Model.Replies)-->
-<!--{-->
-
-
-<!--<br/>-->
-
-<!--<div class="card">-->
-<!--&lt;!&ndash;  @if (this.User.IsAdmin() || this.User.Identity.Name == reply.AuthorName)&ndash;&gt;-->
-<!--&lt;!&ndash;  {&ndash;&gt;-->
-<!--&lt;!&ndash;  <form method="get" asp-controller="Reply" asp-action="Edit" asp-route-id="@reply.Id">&ndash;&gt;-->
-<!--&lt;!&ndash;      <button class="btn btn-custom-post"><i class="fa fa-edit"> Edit</i></button>&ndash;&gt;-->
-<!--&lt;!&ndash;  </form>&ndash;&gt;-->
-<!--&lt;!&ndash;  }&ndash;&gt;-->
-<!--  <div class="card-body row">-->
-<!--    <div class="col-2 text-center">-->
-<!--      <img src="@reply.AuthorImageUrl" class="img-circle-post"/>-->
-
-<!--      <br/>-->
-<!--      <a asp-controller="Profile" asp-action="Details" asp-route-id="@reply.AuthorId">@reply.AuthorName</a>-->
-<!--      @if (reply.IsAuthorAdmin)-->
-<!--      {-->
-<!--      <br />-->
-<!--      <p class="badge badge-dark" style="width: 60px;">@Model.AuthorName</p>-->
-<!--      }-->
-<!--      else-->
-<!--      {-->
-<!--      <p class="badge badge-success" style="width: 60px;">@Model.AuthorName</p>-->
-<!--      }-->
-<!--      <br/>-->
-
-<!--      Points:-->
-<!--      (@reply.KarmaPoints)-->
-
-<!--    </div>-->
-<!--    <div class="col-10">-->
-
-<!--      <p class="card-text"> @Html.Raw(reply.ReplyContent)</p>-->
-
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="card-footer text-muted">-->
-<!--    Posted on: @reply.Created-->
-<!--  </div>-->
-
-<!--  <div class="text-muted small ml-3">-->
-
-<!--  </div>-->
-<!--</div>-->
-
-
-<!--}-->
-<!--  }-->
-
-<!--else-->
-<!--{-->
-<!--<div class="text-center text-primary">-->
-<!--<h3>There are no replies to this post</h3>-->
-<!--</div>-->
-<!--}-->
-
-
-<!--<br/>-->
-
-
-<!--@if (User.Identity.IsAuthenticated)-->
-<!--{-->
-<!--<div class="row">-->
-<!--<span><a class="btn btn-dark" asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id">Add a Reply</a></span>-->
-<!--</div>-->
-<!--}-->
-<!--else-->
-<!--{-->
-<!--<p class="text-center text-dark">-->
-<!--You must be a registered user to add a reply.-->
-<!--<a class=" text-primary" asp-area="Identity" asp-page="/Account/Register">Login</a> or-->
-<!--<a class=" text-primary" a asp-area="Identity" asp-page="/Account/Register">Register</a>-->
-<!--now.-->
-<!--</p>-->
-<!--}-->
-
-
-<!--<script>-->
-
-<!--function sendVote(postId, isUpVote) {-->
-<!--var token = $("#votesForm input[name=__RequestVerificationToken]").val();-->
-<!--var json = { postId: postId, isUpVote: isUpVote };-->
-<!--$.ajax({-->
-<!--url: "/api/votes",-->
-<!--type: "POST",-->
-<!--data: JSON.stringify(json),-->
-<!--contentType: "application/json; charset=utf-8",-->
-<!--dataType: "json",-->
-<!--headers: { 'X-CSRF-TOKEN': token },-->
-<!--success: function (data) {-->
-<!--$("#votesCount").html(data.votesCount);-->
-<!--},-->
-<!--error: function (xhr, status, error) {-->
-<!--var err = eval("(" + xhr.responseText + ")");-->
-<!--alert(err.TITLE);-->
-<!--}-->
-<!--  });-->
-
-<!--}-->
-<!--</script>-->
-<!--}-->

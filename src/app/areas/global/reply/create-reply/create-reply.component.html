@@ -1,1 +1,79 @@
-<p>create-reply works!</p>
+<h1>Add reply to: @Model.PostTitle</h1>
+
+<div>
+  <img href="@Model.CategoryImageUrl"/>
+  <a href="javascript:void(0)" routerLink="/post/details/{{postId}}">Go back to post</a>
+
+
+  <br/>
+  <br/>
+
+  <div class="card">
+    <div class="card-header">
+      Original post:
+    </div>
+    <div class="card-body row">
+      <div class="col-2 text-center">
+        <img src="{{post.author.profileImageUrl}}" width="60"/>
+
+        <br/>
+        <a href="javascript:void(0)">{{post.author.username}}</a>
+        <ng-container *ngIf="post.author.isAdmin">
+          <br/>
+          <p class="badge badge-dark" style="width: 75px;">{{post.author.username}}</p>
+        </ng-container>
+
+
+        <br/>
+        Points:
+        {{post.author.karmaPoints}}
+
+      </div>
+      <div class="col-10">
+
+        <p class="card-text" [innerHTML]="post.content"></p>
+
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      Posted on: {{post.parsedCreated}}
+    </div>
+  </div>
+
+
+</div>
+
+<br/>
+
+<div>
+  <form #f="ngForm" [formGroup]="form" (ngSubmit)="onFormSubmit(f)">
+
+    <div class="form-group">
+      <label for="mytextarea">Reply as: {{currUser.username}}</label>
+      <editor
+        id="mytextarea"
+        formControlName="content"
+        apiKey="m3edqqp0ax7sg5r2fjilwhp1003m8da5o44echmgnzus5ajm"
+        [init]="{
+     height: 500,
+     menubar: false,
+     plugins: [
+       'advlist autolink lists link image charmap print preview anchor',
+       'searchreplace visualblocks code fullscreen',
+       'insertdatetime media table paste code help wordcount'
+     ],
+
+     toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment'
+   }"></editor>
+      <span class="text-danger"></span>
+
+    </div>
+    <button mat-raised-button color="primary" type="submit" [class.spinner]="loadingSpinnerBtn"
+            [disabled]="loadingSpinnerBtn">Submit reply
+    </button>
+    <button type="reset" class="btn btn-danger">Reset</button>
+  </form>
+</div>
+
+
+

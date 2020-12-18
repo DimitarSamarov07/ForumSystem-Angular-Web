@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import IPost from "../../shared/interfaces/IPost";
 import ICategoryDetailsList from "../../shared/interfaces/ICategoryDetailsList";
+import * as moment from "moment";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class PostService {
 
   private postStore = Backendless.Data.of("Posts");
   private categoryStore = Backendless.Data.of("Categories");
+  private replyStore = Backendless.Data.of("Replies")
 
   constructor() {
   }
@@ -62,6 +64,19 @@ export class PostService {
   async retrievePost(postId) {
     const query = await Backendless.DataQueryBuilder.create().setRelated(["author", "category"]);
     return await this.postStore.findById<IPost>(postId, query);
+  }
+
+  async retrievePostWithReplies(postId) {
+    debugger;
+    const post = await this.retrievePost(postId);
+
+    const clause = `post = '${postId}'`;
+    const query = Backendless.DataQueryBuilder.create().setWhereClause(clause).setRelated("author");
+
+    post.replies = await this.replyStore.find(query);
+    post.replies.forEach(x => x.parsedCreated = moment(x.created).format("DD/MM/YYYY hh:mm:ss"))
+
+    return post;
   }
 
   async deletePost(postId) {

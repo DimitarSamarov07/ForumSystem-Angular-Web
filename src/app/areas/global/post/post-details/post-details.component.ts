@@ -31,10 +31,10 @@ export class PostDetailsComponent implements OnInit {
 
   async ngOnInit() {
     this.currUser = await this.userService.getCurrUser()
-    this.post = await this.postService.retrievePost(this.postId);
+    this.post = await this.postService.retrievePostWithReplies(this.postId);
     this.categoryId = this.post.category.objectId;
     this.post.parsedCreated = this.getConvertedDate(this.post.created);
-    this.isCurrUserAuthor = this.currUser.objectId === this.post.author.objectId;
+    this.isCurrUserAuthor = this.currUser?.objectId === this.post.author.objectId;
     this.votesCount = await this.voteService.getPostVotesCount(this.postId);
 
     this.dataReady = true;
@@ -45,7 +45,8 @@ export class PostDetailsComponent implements OnInit {
     const currUser = await Backendless.UserService.getCurrentUser();
     await this.voteService.registerVote(this.postId, currUser.objectId, typeOfVote);
     this.votesCount = await this.voteService.getPostVotesCount(this.postId);
-    this.post = await this.postService.retrievePost(this.postId);
+    const newData = await this.postService.retrievePost(this.postId);
+    Object.assign(this.post, newData);
     this.dataReady = true;
 
   }

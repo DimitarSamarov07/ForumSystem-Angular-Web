@@ -13,6 +13,9 @@ import {PostCreateComponent} from "./post/post-create/post-create.component";
 import {MatButtonModule} from "@angular/material/button";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {CreateReplyComponent} from "./reply/create-reply/create-reply.component";
+import {GlobalAuthenticationCanActivateGuard} from "../../core/guards/global-authentication-can-activate.guard";
+import {GlobalAreaAuthGuard} from "../../core/guards/global-area-auth.guard";
+import {EditReplyComponent} from "./reply/edit-reply/edit-reply.component";
 
 @NgModule({
   declarations: [
@@ -21,8 +24,10 @@ import {CreateReplyComponent} from "./reply/create-reply/create-reply.component"
     PostDetailsComponent,
     PostEditComponent,
     PostCreateComponent,
-    CreateReplyComponent
+    CreateReplyComponent,
+    EditReplyComponent
   ],
+  providers: [GlobalAreaAuthGuard, GlobalAuthenticationCanActivateGuard],
   imports: [
     CoreModule,
     GlobalRoutingModule,
