@@ -31,6 +31,13 @@ export class PostService {
     const query = Backendless.DataQueryBuilder.create().setPageSize(n).setRelated("author");
     const posts = await this.postStore.find<IPost>(query);
 
+    for (const post of posts) {
+      const replyClause = `post = '${post.objectId}'`
+      const replyQuery = Backendless.DataQueryBuilder.create().setWhereClause(replyClause);
+
+      post.repliesCount = await this.replyStore.getObjectCount(replyQuery);
+    }
+
     return posts.sort((a, b) => (new Date(b.created)).getTime() - (new Date(a.created)).getTime())
   }
 
@@ -67,7 +74,6 @@ export class PostService {
   }
 
   async retrievePostWithReplies(postId) {
-    debugger;
     const post = await this.retrievePost(postId);
 
     const clause = `post = '${postId}'`;
@@ -98,5 +104,19 @@ export class PostService {
   private static async calculateOffset(page, objPerPage) {
     // const queryBuilder = Backendless.DataQueryBuilder.create().setOffset(offset).setPageSize(objPerPage);
     return objPerPage * page;
+  }
+
+  async getNMostPopularPosts(n: number) {
+    const postQuery = Backendless.DataQueryBuilder.create().setRelated("author")
+
+    const posts = await this.postStore.find<IPost>(postQuery)
+
+    for (const post of posts) {
+      const clause = `post = '${post.objectId}'`;
+      const query = Backendless.DataQueryBuilder.create().setWhereClause(clause);
+      post.repliesCount = await this.replyStore.getObjectCount(query);
+    }
+
+    return posts.sort((a, b) => b.repliesCount - a.repliesCount).slice(0, n)
   }
 }

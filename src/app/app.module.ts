@@ -14,6 +14,7 @@ import {AdminModule} from "./areas/admin/admin.module";
 import {MainLayoutComponent} from './core/main-layout/main-layout.component';
 import {GlobalModule} from "./areas/global/global.module";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 Backendless.initApp(environment.backendless.APP_ID, environment.backendless.API_KEY);
 
@@ -32,7 +33,8 @@ Backendless.initApp(environment.backendless.APP_ID, environment.backendless.API_
     AdminModule,
     CoreModule,
     UserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule
   ],
   bootstrap: [AppComponent],
 })

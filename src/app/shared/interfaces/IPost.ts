@@ -10,4 +10,5 @@ export default interface IPost extends IBaseModel {
   category: ICategory
   parsedCreated: string,
   replies: IReply[],
+  repliesCount: number
 }
