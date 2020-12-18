@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, Renderer2} from '@angular/core';
 import IPost from "../../../../shared/interfaces/IPost";
 import {PostService} from "../../../../services/post/post.service";
 import {ActivatedRoute} from "@angular/router";
 import * as moment from 'moment';
+import {DOCUMENT} from "@angular/common";
+import {CategoryService} from "../../../../services/category/category.service";
 
 @Component({
   selector: 'app-list-category-posts-admin',
@@ -16,7 +18,11 @@ export class ListCategoryPostsAdminComponent implements OnInit {
   public posts: IPost[];
   loading = true;
 
-  constructor(private postAdminService: PostService, private activatedRoute: ActivatedRoute) {
+  constructor(private postAdminService: PostService,
+              private categoryService: CategoryService,
+              private activatedRoute: ActivatedRoute,
+              private _renderer2: Renderer2,
+              @Inject(DOCUMENT) private _document: Document) {
     this.categoryId = this.activatedRoute.snapshot.params.categoryId;
   }
 
@@ -26,8 +32,10 @@ export class ListCategoryPostsAdminComponent implements OnInit {
 
   async loadData() {
     this.loading = true;
+    const {title} = await this.categoryService.retrieveCategoryById(this.categoryId)
+    this.categoryName = title;
     this.posts = await this.postAdminService.retrievePostsFromCategory(this.categoryId);
-    this.posts.forEach(x => x.parsedCreated = moment(x.created).format("DD/MM/YYYY"))
+    this.posts.forEach(x => x.parsedCreated = moment(x.created).format("DD/MM/YYYY hh:mm:ss"))
     this.loading = false;
   }
 
@@ -39,4 +47,5 @@ export class ListCategoryPostsAdminComponent implements OnInit {
     await this.postAdminService.deletePost(postId);
     await this.loadData();
   }
+
 }

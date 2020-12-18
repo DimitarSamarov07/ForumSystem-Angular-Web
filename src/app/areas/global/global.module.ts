@@ -16,6 +16,8 @@ import {CreateReplyComponent} from "./reply/create-reply/create-reply.component"
 import {GlobalAuthenticationCanActivateGuard} from "../../core/guards/global-authentication-can-activate.guard";
 import {GlobalAreaAuthGuard} from "../../core/guards/global-area-auth.guard";
 import {EditReplyComponent} from "./reply/edit-reply/edit-reply.component";
+import {ProfileIndexComponent} from "./profile/profile-index/profile-index.component";
+import {ProfileImageUploadModalComponent} from "./profile/profile-image-upload-modal/profile-image-upload-modal.component";
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import {EditReplyComponent} from "./reply/edit-reply/edit-reply.component";
     PostEditComponent,
     PostCreateComponent,
     CreateReplyComponent,
-    EditReplyComponent
+    EditReplyComponent,
+    ProfileIndexComponent,
+    ProfileImageUploadModalComponent
   ],
   providers: [GlobalAreaAuthGuard, GlobalAuthenticationCanActivateGuard],
   imports: [

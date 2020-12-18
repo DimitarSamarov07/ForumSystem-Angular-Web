@@ -1,0 +1,41 @@
+<h1>User Profile</h1>
+
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div class="container body-content" *ngIf="!loading">
+  <div class="row sectionHeader">
+    <div class="sectionHeading noBorder">
+
+    </div>
+  </div>
+  <ng-container>
+
+  </ng-container>
+  <div class="row ">
+    <div class="col-md-4 text-center">
+      <img src="{{user.profileImageUrl}}" class="img-circle-profile"/>
+    </div>
+
+
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{user.username}}</h5>
+          <p class="card-text">
+            <ng-container *ngIf="user.isAdmin">
+              <span class="badge badge-dark">Admin</span>
+              <br/>
+            </ng-container>
+
+            <span id="userRating">Current Karma: {{user.karmaPoints}}</span>
+            <br/>
+            <span id="userEmailLabel">Email: {{user.email}}</span> <br/>
+            <span id="userCreatedLabel">Member Since: {{user.memberSince}}</span> <br/>
+          </p>
+          <app-profile-image-upload-modal *ngIf="user.objectId === currUser.objectId"
+                                          [user]="user"></app-profile-image-upload-modal>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

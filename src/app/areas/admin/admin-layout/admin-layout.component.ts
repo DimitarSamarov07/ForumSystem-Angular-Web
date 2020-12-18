@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
 import {filter, map} from "rxjs/operators";
+import {UserService} from "../../../user/user.service";
 
 @Component({
   selector: 'app-admin-layout',
@@ -9,7 +10,7 @@ import {filter, map} from "rxjs/operators";
 })
 export class AdminLayoutComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private userService: UserService) {
     this.router.events
       .pipe(
         // @ts-ignore
@@ -23,7 +24,11 @@ export class AdminLayoutComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    const currUser = await this.userService.getCurrUser();
+    if (!currUser.isAdmin) {
+      return this.router.navigateByUrl("/")
+    }
   }
 
 }

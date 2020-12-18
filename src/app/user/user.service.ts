@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import IUser from "../shared/interfaces/IUser";
+import {CloudinaryService} from "../services/shared/cloudinary.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,28 @@ export class UserService {
 
   private userStore = Backendless.Data.of("Users")
 
-  constructor() {
+  constructor(private cloudinaryService: CloudinaryService) {
   }
 
   async getUserById(id) {
     return await this.userStore.findById(id);
+  }
+
+  async changeProfilePic(user: IUser, file) {
+    debugger;
+    user.profileImageUrl = await this.cloudinaryService.uploadImage(file);
+    await this.userStore.save(user);
+  }
+
+  async getUserByUsername(username) {
+    const clause = `username = '${username}'`;
+    const query = Backendless.DataQueryBuilder.create().setWhereClause(clause);
+
+    try {
+      return await this.userStore.findFirst<IUser>(query)
+    } catch (e) {
+      return null;
+    }
   }
 
   async checkIfUserIsLoggedIn() {

@@ -1,0 +1,38 @@
+<div class="container">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Change Profile Image</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" role="document">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Change Profile Picture</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label>Upload Profile Image</label>
+          <br/>
+          <label class="btn btn-dark">
+            <input class="btn btn-dark" type="file" (change)="registerPhoto($event)"/>
+          </label>
+          <br/>
+          <span class="text-danger" *ngIf="imgRequiredErr">Image is required.</span>
+          <br/>
+          <p class="text-danger">Make sure to use high-resolution images with aspect ratio 16:9</p>
+          <br/>
+        </div>
+        <div class="modal-footer">
+          <button mat-raised-button [disabled]="uploading" (click)="onUpdateClick()">Update</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

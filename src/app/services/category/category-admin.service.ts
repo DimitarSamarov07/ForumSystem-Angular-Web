@@ -18,7 +18,7 @@ export class CategoryAdminService extends CategoryService {
   }
 
   async createNewCategory({title, description,}, image) {
-    const imageUrl = await this.cloudinaryService.uploadCategoryImage(image);
+    const imageUrl = await this.cloudinaryService.uploadImage(image);
     try {
       await this.categoryStore.save({title, description, imageUrl});
     } catch (e) {
@@ -37,7 +37,7 @@ export class CategoryAdminService extends CategoryService {
 
   async editCategoryById(id: string, data, imgFile?) {
     if (imgFile) {
-      data.imageUrl = await this.cloudinaryService.uploadCategoryImage(imgFile);
+      data.imageUrl = await this.cloudinaryService.uploadImage(imgFile);
     }
     const category = await this.categoryStore.findById(id);
     Object.assign(category, data); //overwrite data

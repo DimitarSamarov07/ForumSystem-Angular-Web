@@ -8,7 +8,7 @@ export class CloudinaryService {
   constructor() {
   }
 
-  async uploadCategoryImage(imgFile) {
+  async uploadImage(imgFile) {
     const formData = new FormData();
 
     formData.append("file", imgFile);

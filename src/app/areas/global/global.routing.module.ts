@@ -9,6 +9,7 @@ import {PostEditComponent} from "./post/post-edit/post-edit.component";
 import {CreateReplyComponent} from "./reply/create-reply/create-reply.component";
 import {GlobalAuthenticationCanActivateGuard} from "../../core/guards/global-authentication-can-activate.guard";
 import {EditReplyComponent} from "./reply/edit-reply/edit-reply.component";
+import {ProfileIndexComponent} from "./profile/profile-index/profile-index.component";
 
 const routes: Routes = [
   {
@@ -57,6 +58,16 @@ const routes: Routes = [
       {
         path: "edit/:replyId",
         component: EditReplyComponent
+      }
+    ]
+  },
+  {
+    path: "profile",
+    component: MainLayoutComponent,
+    children: [
+      {
+        path: "index/:username",
+        component: ProfileIndexComponent
       }
     ]
   }

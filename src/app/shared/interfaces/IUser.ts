@@ -7,5 +7,6 @@ export default interface IUser extends IBaseModel {
   karmaPoints: number,
   profileImageUrl: string,
   username: string,
-  posts: IPost[]
+  posts: IPost[],
+  memberSince: string
 }

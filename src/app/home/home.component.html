@@ -76,9 +76,11 @@
             <div>
               <h6 style="margin-bottom: 0;">by</h6>
 
-              <a href="javascript:void(0)" routerLink="/profile/{{post.author.username}}" *ngIf="post.author.isAdmin"
+              <a href="javascript:void(0)" routerLink="/profile/index/{{post.author.username}}"
+                 *ngIf="post.author.isAdmin"
                  class="author-name badge badge-dark">{{post.author.username}}</a>
-              <a href="javascript:void(0)" routerLink="/profile/{{post.author.username}}" *ngIf="!post.author.isAdmin"
+              <a href="javascript:void(0)" routerLink="/profile/index/{{post.author.username}}"
+                 *ngIf="!post.author.isAdmin"
                  class="author-name badge badge-success">{{post.author.username}}</a>
 
             </div>
@@ -113,9 +115,11 @@
             <div><a href="javascript:void(0)" routerLink="/post/details/{{post.objectId}}">{{post.title}}</a></div>
             <div>
               <h6 style="margin-bottom: 0;">by</h6>
-              <a *ngIf="post.author.isAdmin" href="javascript:void(0)" routerLink="/profile/{{post.author.username}}"
+              <a *ngIf="post.author.isAdmin" href="javascript:void(0)"
+                 routerLink="/profile/index/{{post.author.username}}"
                  class="author-name badge badge-dark">{{post.author.username}}</a>
-              <a *ngIf="!post.author.isAdmin" href="javascript:void(0)" routerLink="/profile/{{post.author.username}}"
+              <a *ngIf="!post.author.isAdmin" href="javascript:void(0)"
+                 routerLink="/profile/index/{{post.author.username}}"
                  class="author-name badge badge-success">{{post.author.username}}</a>
 
 

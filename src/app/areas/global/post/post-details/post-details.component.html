@@ -85,7 +85,8 @@
             <img src="{{reply.author.profileImageUrl}}" class="img-circle-post"/>
             <br/>
 
-            <a href="javascript:void(0)" routerLink="/profile/{{reply.author.username}}">{{reply.author.username}}</a>
+            <a href="javascript:void(0)"
+               routerLink="/profile/index/{{reply.author.username}}">{{reply.author.username}}</a>
             <ng-container *ngIf="reply.author.isAdmin else normalUser">
               <br/>
               <p class="badge badge-dark" style="width: 60px;">Admin</p>
