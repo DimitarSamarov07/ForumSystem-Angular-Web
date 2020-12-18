@@ -65,7 +65,6 @@ export class CategoryService {
   }
 
   private async getPaginatorData(currPage, objPerPage): Promise<IFullCategoryListing[]> {
-    debugger;
     const offset = objPerPage * (currPage - 1);
 
     const queryBuilder = Backendless.DataQueryBuilder.create().setOffset(offset).setPageSize(objPerPage);

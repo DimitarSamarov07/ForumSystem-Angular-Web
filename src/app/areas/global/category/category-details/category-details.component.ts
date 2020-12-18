@@ -30,9 +30,6 @@ export class CategoryDetailsComponent implements OnInit {
   }
 
   async ngOnInit() {
-    debugger;
-    console.log("hi")
-    console.log(this.categoryId)
     this.category = await this.postService.paginatePostsFromCategory(this.categoryId, 0, 10)
     this.totalDataLength = await this.postService.getCountOfCategoryPosts(this.categoryId);
   }
@@ -54,7 +51,6 @@ export class CategoryDetailsComponent implements OnInit {
   }
 
   async onPaginatorEvent($event: PageEvent) {
-    debugger;
     const page = $event.pageIndex;
     const size = $event.pageSize;
     this.category = await this.postService.paginatePostsFromCategory(this.categoryId, page, size);

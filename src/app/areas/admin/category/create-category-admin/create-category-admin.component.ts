@@ -29,7 +29,6 @@ export class CreateCategoryAdminComponent implements OnInit {
   registerPhoto(event) {
     this.imgFile = event.target.files[0];
     this.imgRequiredErr = false;
-    console.log(this.imgFile, "registerPhoto")
   }
 
   async createCategoryOnFormSubmit(form) {

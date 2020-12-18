@@ -7,7 +7,13 @@ import IUser from "../shared/interfaces/IUser";
 
 export class UserService {
 
+  private userStore = Backendless.Data.of("Users")
+
   constructor() {
+  }
+
+  async getUserById(id) {
+    return await this.userStore.findById(id);
   }
 
   async registerNewUser(userData) {

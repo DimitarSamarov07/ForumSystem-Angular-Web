@@ -22,7 +22,6 @@ export class EditPostAdminComponent implements OnInit {
               private fb: FormBuilder,
               private router: Router) {
 
-    debugger;
     this.postId = activatedRoute.snapshot.params.postId;
     this.categoryId = activatedRoute.snapshot.params.categoryId;
   }
@@ -38,7 +37,6 @@ export class EditPostAdminComponent implements OnInit {
 
   async onEditFormSubmit(form) {
     if (form.valid) {
-      debugger;
       await this.postService.editPost({title: form.value.title, content: form.value.content}, this.postId)
       await this.router.navigateByUrl(`/administration/post/list/${this.categoryId}`)
     }

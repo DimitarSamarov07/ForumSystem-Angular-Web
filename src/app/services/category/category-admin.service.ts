@@ -22,7 +22,7 @@ export class CategoryAdminService extends CategoryService {
     try {
       await this.categoryStore.save({title, description, imageUrl});
     } catch (e) {
-      console.log(e)
+
     }
   }
 

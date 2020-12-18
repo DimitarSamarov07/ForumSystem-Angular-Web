@@ -1,3 +1,4 @@
+<mat-spinner *ngIf="!dataReady"></mat-spinner>
 <ng-container *ngIf="dataReady">
   <h1>{{post.title}}</h1>
   <a href="javascript:void(0)" routerLink="/category/details/{{categoryId}}">Back to category</a>
@@ -50,15 +51,15 @@
     <div class="card-footer text-muted">
       Posted on: {{post.parsedCreated}}
       <div>
-        <a href="#" (click)="sendVote(true)">
+        <a href="javascript:void(0)" (click)="sendVote(true)">
           <i class="fa fa-thumbs-up"></i>
         </a>
       </div>
 
       <!--      TODO: Implement vote counter-->
-      <div id="votesCount">Not implemented</div>
+      <div id="votesCount">{{votesCount}}</div>
       <div>
-        <a href="#" (click)="sendVote(false)">
+        <a href="javascript:void(0)" (click)="sendVote(false)">
           <i class="fa fa-thumbs-down"></i>
         </a>
       </div>
