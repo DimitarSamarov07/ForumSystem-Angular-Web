@@ -28,8 +28,8 @@
             </tr>
             </thead>
             <tbody>
+            <mat-spinner *ngIf="loading"></mat-spinner>
 
-            <!--            TODO: Add loading-->
             <tr *ngFor="let post of posts trackBy: trackItem">
               <td>{{post.objectId}}</td>
               <td>{{post.title}}</td>
@@ -37,12 +37,17 @@
               <td>
                 <a href="javascript:void(0)"
                    routerLink="/administration/post/edit/{{post.category.objectId}}/{{post.objectId}}">Edit</a> |
-<!--                TODO: Add Sweet Alert-->
-                <a href="javascript:void(0)" routerLink="/administration/post/delete/{{post.objectId}}"
-                   (click)="onDeletePostClick(post.objectId)">Delete</a> |
-                <!--                TODO: Add link to forum-->
-                <a>View in forum</a>
-
+                <a href="javascript:void(0)" [swal]="deleteSwal">Delete</a> |
+                <a routerLink="/post/details/{{post.objectId}}">View in forum</a>
+                <swal
+                  #deleteSwal
+                  position="center"
+                  title="Delete {{post.title}}"
+                  text="This cannot be undone. Are you sure you want to continue ?"
+                  icon="error"
+                  [showCancelButton]="true"
+                  [focusCancel]="true"
+                  (confirm)="onDeletePostClick(post.objectId)"></swal>
               </td>
             </tr>
 
@@ -56,3 +61,5 @@
   </div>
   <!-- /.row -->
 </section>
+
+

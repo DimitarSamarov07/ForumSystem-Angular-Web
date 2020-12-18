@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from "@angular/router";
+import {filter, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-admin-layout',
@@ -7,8 +9,18 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AdminLayoutComponent implements OnInit {
 
-  //TODO: IMPORTANT!!!! FIX SCRIPTS AND HEAD LINKS
-  constructor() {
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(
+        // @ts-ignore
+        filter(e => e instanceof NavigationEnd && this.router.getCurrentNavigation().previousNavigation),
+        map(() => this.router.getCurrentNavigation().previousNavigation.finalUrl.toString()),
+      )
+      .subscribe((previousUrl) => {
+        if (!previousUrl.includes("administration")) {
+          window.location.reload();
+        }
+      });
   }
 
   ngOnInit(): void {

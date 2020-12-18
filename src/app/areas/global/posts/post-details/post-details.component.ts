@@ -34,6 +34,7 @@ export class PostDetailsComponent implements OnInit {
     this.post.parsedCreated = this.getConvertedDate(this.post.created);
     this.isCurrUserAuthor = this.currUser.objectId === this.post.author.objectId;
 
+    debugger;
     this.dataReady = true;
   }
 

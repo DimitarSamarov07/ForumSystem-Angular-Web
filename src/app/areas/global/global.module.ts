@@ -11,6 +11,7 @@ import {PostEditComponent} from "./posts/post-edit/post-edit.component";
 import {EditorModule} from "@tinymce/tinymce-angular";
 import {PostCreateComponent} from "./posts/post-create/post-create.component";
 import {MatButtonModule} from "@angular/material/button";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatButtonModule} from "@angular/material/button";
     CommonModule,
     ReactiveFormsModule,
     EditorModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   exports: []
 })

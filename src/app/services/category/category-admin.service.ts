@@ -3,6 +3,7 @@ import {CloudinaryService} from "../shared/cloudinary.service";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {CategoryService} from "./category.service";
+import {PostService} from "../post/post.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,9 @@ export class CategoryAdminService extends CategoryService {
 
   constructor(cloudinaryService: CloudinaryService,
               http: HttpClient,
-              router: Router) {
-    super(cloudinaryService, http, router);
+              router: Router,
+              postService: PostService) {
+    super(cloudinaryService, http, router, postService);
   }
 
   async createNewCategory({title, description,}, image) {
@@ -23,6 +25,7 @@ export class CategoryAdminService extends CategoryService {
       console.log(e)
     }
   }
+
 
   async deleteCategoryById(objectId) {
     try {

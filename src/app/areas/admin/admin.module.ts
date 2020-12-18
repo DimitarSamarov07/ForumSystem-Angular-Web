@@ -17,6 +17,7 @@ import {EditCategoryAdminComponent} from './category/edit-category-admin/edit-ca
 import {ListCategoryPostsAdminComponent} from './post/list-category-posts-admin/list-category-posts-admin.component';
 import {EditorModule} from "@tinymce/tinymce-angular";
 import {EditPostAdminComponent} from './post/edit-post-admin/edit-post-admin.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {EditPostAdminComponent} from './post/edit-post-admin/edit-post-admin.com
   imports: [
     RouterModule,
     AdminRoutingModule,
+    MatProgressSpinnerModule,
     BrowserModule,
     CoreModule,
     UserModule,
@@ -39,7 +41,7 @@ import {EditPostAdminComponent} from './post/edit-post-admin/edit-post-admin.com
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
   ],
   providers: [GlobalAdminAuthenticationGuard],
   bootstrap: [MainMenuComponent],

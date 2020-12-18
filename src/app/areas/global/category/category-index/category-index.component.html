@@ -1,9 +1,8 @@
 <h1>List of categories</h1>
 
+<mat-spinner *ngIf="loading"></mat-spinner>
 <table class="table table-bordered table-hover">
-
   <tbody>
-
   <tr *ngFor="let category of categories trackBy: trackItem">
     <td>
       <div class="row">
@@ -19,9 +18,8 @@
 
           {{category.description}}
           <div class="text-muted">
-            <!--            TODO: Post and user counter-->
-            2 Posts by
-            2 Users
+            {{category.postsCount}} Posts by
+            {{category.usersCount}} Users
           </div>
         </div>
 

@@ -20,7 +20,8 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.categories = await this.categoryService.getNCategories(10);
+    debugger;
+    this.categories = await this.categoryService.getNCategoriesWithFullData(10);
     this.latestPosts = await this.postService.getLatestNPosts(10);
   }
 

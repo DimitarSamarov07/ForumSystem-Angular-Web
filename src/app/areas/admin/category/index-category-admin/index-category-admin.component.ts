@@ -2,6 +2,7 @@ import {Component, Inject, OnInit, Renderer2} from '@angular/core';
 import ICategory from "../../../../shared/interfaces/ICategory";
 import {CategoryAdminService} from "../../../../services/category/category-admin.service";
 import {DOCUMENT} from "@angular/common";
+import IFullCategoryListing from "../../../../shared/interfaces/IFullCategoryListing";
 
 @Component({
   selector: 'app-index-category',
@@ -10,7 +11,8 @@ import {DOCUMENT} from "@angular/common";
 })
 export class IndexCategoryAdminComponent implements OnInit {
 
-  public categories: ICategory[];
+  public categories: IFullCategoryListing[];
+  loading = true;
 
   constructor(
     private categoryService: CategoryAdminService,
@@ -24,7 +26,9 @@ export class IndexCategoryAdminComponent implements OnInit {
   }
 
   async loadCategories() {
-    this.categories = await this.categoryService.retrieveCategories();
+    this.loading = true;
+    this.categories = await this.categoryService.retrieveCategoriesWithUserAndPostCounts();
+    this.loading = false;
   }
 
   public trackItem(index: number, item: ICategory) {

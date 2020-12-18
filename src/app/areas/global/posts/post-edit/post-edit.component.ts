@@ -15,6 +15,7 @@ export class PostEditComponent implements OnInit {
   postId: string;
   post: IPost;
   categoryId: string;
+  loadingBtn = true;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -33,8 +34,13 @@ export class PostEditComponent implements OnInit {
   }
 
 
-  onFormSubmit(formData) {
-
+  async onFormSubmit(formData) {
+    if (formData.valid) {
+      this.loadingBtn = true;
+      await this.postService.editPostContent(formData.value.content, this.postId)
+      this.loadingBtn = false;
+      await this.router.navigateByUrl(`/post/${this.categoryId}/${this.postId}`)
+    }
   }
 
 }

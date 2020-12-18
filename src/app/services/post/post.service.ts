@@ -15,7 +15,8 @@ export class PostService {
 
 
   async retrievePostsFromCategory(categoryId) {
-    const queryBuilder = Backendless.DataQueryBuilder.create().setWhereClause(`category = '${categoryId}'`).setRelated("author").setRelated("category");
+    const queryBuilder = Backendless.DataQueryBuilder.create().setWhereClause(`category = '${categoryId}'`)
+      .setRelated(["author", "category"])
 
     return await this.postStore.find<IPost>(queryBuilder);
   }
@@ -52,9 +53,10 @@ export class PostService {
   }
 
   async createPost({title, content}, category, userId) {
-    const newPost = await this.postStore.save({title, content});
+    const newPost = await this.postStore.save<IPost>({title, content});
     await this.postStore.setRelation(newPost, "author", [{objectId: userId}]);
     await this.postStore.setRelation(newPost, "category", [{objectId: category}])
+    return newPost.objectId;
   }
 
   async retrievePost(postId) {
@@ -63,13 +65,19 @@ export class PostService {
   }
 
   async deletePost(postId) {
-    await this.postStore.remove({postId});
+    await this.postStore.remove({objectId: postId});
   }
 
   async editPost({title, content}, postId) {
     const post = await this.retrievePost(postId)
     Object.assign(post, {title, content});
     await this.postStore.save(post);
+  }
+
+  async editPostContent(content, postId) {
+    const post = await this.retrievePost(postId);
+    Object.assign(post, {content});
+    await this.postStore.save(post)
   }
 
   private static async calculateOffset(page, objPerPage) {

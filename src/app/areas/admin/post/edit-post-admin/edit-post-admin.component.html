@@ -4,7 +4,7 @@
   </h1>
 </section>
 <!-- Main content -->
-<!--TODO: Implement loader-->
+<mat-spinner *ngIf="!isDataReady"></mat-spinner>
 <section class="content container-fluid" *ngIf="isDataReady">
   <!-- Horizontal Form -->
   <div class="box box-info">

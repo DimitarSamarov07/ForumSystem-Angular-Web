@@ -14,14 +14,21 @@ export class ListCategoryPostsAdminComponent implements OnInit {
   public categoryName: string;
   private readonly categoryId: string;
   public posts: IPost[];
+  loading = true;
 
   constructor(private postAdminService: PostService, private activatedRoute: ActivatedRoute) {
     this.categoryId = this.activatedRoute.snapshot.params.categoryId;
   }
 
   async ngOnInit() {
+    await this.loadData()
+  }
+
+  async loadData() {
+    this.loading = true;
     this.posts = await this.postAdminService.retrievePostsFromCategory(this.categoryId);
     this.posts.forEach(x => x.parsedCreated = moment(x.created).format("DD/MM/YYYY"))
+    this.loading = false;
   }
 
   public trackItem(index: number, item: IPost) {
@@ -30,5 +37,6 @@ export class ListCategoryPostsAdminComponent implements OnInit {
 
   async onDeletePostClick(postId: string) {
     await this.postAdminService.deletePost(postId);
+    await this.loadData();
   }
 }

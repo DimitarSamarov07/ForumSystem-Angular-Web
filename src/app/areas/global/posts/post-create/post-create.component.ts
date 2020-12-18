@@ -36,6 +36,10 @@ export class PostCreateComponent implements OnInit {
   async onFormSubmit(formData) {
     if (formData.valid) {
       this.loading = true;
+      const {objectId: userId} = await Backendless.UserService.getCurrentUser();
+      debugger;
+      const newPostId = await this.postService.createPost(formData.value, this.categoryId, userId);
+      await this.router.navigateByUrl(`/post/${this.categoryId}/${newPostId}`)
     }
 
   }
