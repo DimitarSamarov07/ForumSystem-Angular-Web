@@ -4,7 +4,12 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class ReplyService {
+  private replyStore = Backendless.Data.of("Replies");
 
   constructor() {
+  }
+
+  createReply(postId, replyContent) {
+
   }
 }

@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivateChild, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GlobalAreaAuthGuard implements CanActivateChild {
-  canActivateChild(
+export class GlobalAuthenticationCanActivateGuard implements CanActivate {
+  canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return Backendless.UserService.isValidLogin();
+    return true;
   }
 
 }

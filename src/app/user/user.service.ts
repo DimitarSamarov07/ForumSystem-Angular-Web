@@ -16,6 +16,15 @@ export class UserService {
     return await this.userStore.findById(id);
   }
 
+  async checkIfUserIsLoggedIn() {
+    return await Backendless.UserService.isValidLogin();
+  }
+
+  async checkIfCurrUserIsAdmin() {
+    const currUser = await this.getCurrUser();
+    return currUser.isAdmin;
+  }
+
   async registerNewUser(userData) {
     const user = new Backendless.User();
     Object.assign(user, userData)
@@ -40,7 +49,11 @@ export class UserService {
   }
 
   async getCurrUser(): Promise<IUser> {
-    return await Backendless.UserService.getCurrentUser<IUser>();
+    try {
+      return await Backendless.UserService.getCurrentUser<IUser>();
+    } catch (e) {
+      return null;
+    }
   }
 
   async logoutUser(): Promise<void> {

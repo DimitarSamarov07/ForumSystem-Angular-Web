@@ -12,6 +12,7 @@ import {EditorModule} from "@tinymce/tinymce-angular";
 import {PostCreateComponent} from "./post/post-create/post-create.component";
 import {MatButtonModule} from "@angular/material/button";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {CreateReplyComponent} from "./reply/create-reply/create-reply.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     CategoryDetailsComponent,
     PostDetailsComponent,
     PostEditComponent,
-    PostCreateComponent
+    PostCreateComponent,
+    CreateReplyComponent
   ],
   imports: [
     CoreModule,

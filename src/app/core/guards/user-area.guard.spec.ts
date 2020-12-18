@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 
-import {GlobalAreaAuthGuard} from './global-area-auth-guard.service';
+import {GlobalAreaAuthGuard} from './global-area-auth.guard';
 
 describe('UserAreaGuard', () => {
   let guard: GlobalAreaAuthGuard;
