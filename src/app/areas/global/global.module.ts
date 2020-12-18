@@ -6,10 +6,10 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {CommonModule} from "@angular/common";
 import {CategoryDetailsComponent} from "./category/category-details/category-details.component";
 import {ReactiveFormsModule} from "@angular/forms";
-import {PostDetailsComponent} from "./posts/post-details/post-details.component";
-import {PostEditComponent} from "./posts/post-edit/post-edit.component";
+import {PostDetailsComponent} from "./post/post-details/post-details.component";
+import {PostEditComponent} from "./post/post-edit/post-edit.component";
 import {EditorModule} from "@tinymce/tinymce-angular";
-import {PostCreateComponent} from "./posts/post-create/post-create.component";
+import {PostCreateComponent} from "./post/post-create/post-create.component";
 import {MatButtonModule} from "@angular/material/button";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 

@@ -3,9 +3,9 @@ import {CategoryIndexComponent} from "./category/category-index/category-index.c
 import {MainLayoutComponent} from "../../core/main-layout/main-layout.component";
 import {GlobalAreaAuthGuard} from "../../core/guards/global-area-auth-guard.service";
 import {CategoryDetailsComponent} from "./category/category-details/category-details.component";
-import {PostDetailsComponent} from "./posts/post-details/post-details.component";
-import {PostCreateComponent} from "./posts/post-create/post-create.component";
-import {PostEditComponent} from "./posts/post-edit/post-edit.component";
+import {PostDetailsComponent} from "./post/post-details/post-details.component";
+import {PostCreateComponent} from "./post/post-create/post-create.component";
+import {PostEditComponent} from "./post/post-edit/post-edit.component";
 
 const routes: Routes = [
   {
