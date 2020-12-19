@@ -39,10 +39,14 @@ Enjoy :)
 * Bootstrap
 * Typescript
 * Angular Material
+* Backendless
 
 # Link
 https://forumsystem-angular.herokuapp.com/
 
+
+## Database schema
+![](https://i.ibb.co/n0HZBFY/Categories-schema.png)
 
 ## :v: Show your opinion
 
