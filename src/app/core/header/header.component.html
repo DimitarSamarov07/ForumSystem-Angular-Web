@@ -11,7 +11,8 @@
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
         <ul class="navbar-nav">
           <li *ngIf="user" class="nav-item">
-            <a class="nav-link text-dark">Hello {{user.username}}</a>
+            <a class="nav-link text-dark" href="javascript:void(0)"
+               routerLink="/profile/index/{{user.username}}">Hello {{user.username}}</a>
           </li>
           <li class="dropdown show" *ngIf="isAdmin">
             <a href="#" class="btn  dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -38,12 +39,6 @@
         <ul class="navbar-nav flex-grow-1">
           <li class="nav-item">
             <a class="nav-link text-dark" href="javascript:void(0)" routerLink="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark" href="javascript:void(0)" routerLink="/docs/privacy">Privacy</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark" href="javascript:void(0)" routerLink="/docs/rules">Rules</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-dark" href="javascript:void(0)" routerLink="/category/list">Categories</a>

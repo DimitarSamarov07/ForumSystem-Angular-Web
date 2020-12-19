@@ -1,45 +1,29 @@
+<mat-spinner *ngIf="!category"></mat-spinner>
 <ng-container *ngIf="category">
-  <h1>Welcome to the {{category.title}} category</h1>
+  <h1>Welcome to the <b>{{category.title}}</b> category</h1>
   <div class="align-content-stretch"><img id="borderimage" src="{{category.imageUrl}}" width="553" height="310"/></div>
   <br/>
 
 
-  <!--if is authenticated-->
-  <div class="row">
-    <h3><a class="btn btn-primary" routerLink="/post/create/{{categoryId}}">New Post</a></h3>
-
-  </div>
-
-  <!--else-->
-
-  <p class="text-muted">
+  <p class="text-muted" *ngIf="!currUser else userLoggedIn">
     You must be a registered user to add new posts.
-    <a class="text-dark" routerLink="/user/login">Login</a> or
-    <a class="text-dark" routerLink="/user/register">Register</a>
+    <a class="text-dark" href="javascript:void(0)" routerLink="/user/login">Login</a> or
+    <a class="text-dark" href="javascript:void(0)" routerLink="/user/register">Register</a>
     now.
   </p>
-
-
-  <!--if any post-->
-  <div>
-    <form #f="ngForm" [formGroup]="searchForm" (ngSubmit)="onSearchFormSubmit(f)">
-      <div class="row">
-        <div class="col-10">
-          <input class="form-control" formControlName="query" type="text" placeholder="Search this forum"
-                 (focus)="clearThis(this)"/>
-        </div>
-        <div class="col-2">
-          <button type="submit" class="btn btn-block btn-outline-primary"><i class="fa fa-search"></i></button>
-        </div>
-      </div>
-    </form>
-  </div>
+  <ng-template #userLoggedIn>
+    <div class="row">
+      <h3><a class="btn btn-primary" routerLink="/post/create/{{categoryId}}">New Post</a></h3>
+    </div>
+  </ng-template>
 
   <br/>
   <ng-container *ngIf="category.posts?.length && category.posts?.length === 0 then noPosts"></ng-container>
   <table class="table table-bordered table-hover" *ngIf="category?.posts?.length > 0">
+    <mat-spinner *ngIf="paginating"></mat-spinner>
 
-    <tbody>
+    <tbody *ngIf="!paginating">
+
     <tr *ngFor="let post of category.posts; trackBy: trackItem">
       <td>
         <div>
@@ -66,7 +50,6 @@
         </div>
       </td>
     </tr>
-
     </tbody>
 
   </table>
