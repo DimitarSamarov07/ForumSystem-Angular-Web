@@ -15,8 +15,15 @@ import {MainLayoutComponent} from './core/main-layout/main-layout.component';
 import {GlobalModule} from "./areas/global/global.module";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HttpsOnlyInterceptor} from "./interceptors/https-only.interceptor";
+import {CacheInterceptor} from "./interceptors/cache.interceptor";
 
 Backendless.initApp(environment.backendless.APP_ID, environment.backendless.API_KEY);
+
+const interceptorProvider = [
+  {provide: HTTP_INTERCEPTORS, useClass: HttpsOnlyInterceptor, multi: true},
+  {provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true}]
 
 @NgModule({
   declarations: [
@@ -36,6 +43,7 @@ Backendless.initApp(environment.backendless.APP_ID, environment.backendless.API_
     BrowserAnimationsModule,
     MatProgressSpinnerModule
   ],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {
