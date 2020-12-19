@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
 
   async logout() {
     await this.userService.logoutUser();
+    await this.ngOnInit();
     await this.router.navigateByUrl("/");
   }
 

@@ -1,20 +1,6 @@
 <div class="text-center">
   <h1 class="display-4">Welcome</h1>
 
-
-  <div>
-    <form>
-      <div class="row">
-        <div class="form-group col-10">
-          <input class="form-control form-control-lg" type="text" placeholder="Search for posts"/>
-        </div>
-        <div class="col-2">
-          <button class="btn btn-block btn-lg btn-primary "><i class="fa fa-search"></i></button>
-        </div>
-      </div>
-    </form>
-  </div>
-
   <br/>
   <input onclick="change()" class="btn btn-outline-primary btn-block btn-lg" type="button" data-toggle="collapse"
          data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
@@ -38,8 +24,8 @@
 
               {{category.description}}
               <div class="text-muted">
-                2 Posts by
-                2 Users
+                {{category.postsCount}} Posts by
+                {{category.usersCount}} Users
               </div>
 
               <br/>

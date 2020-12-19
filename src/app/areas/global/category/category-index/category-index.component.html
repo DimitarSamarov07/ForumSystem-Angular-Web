@@ -17,7 +17,23 @@
           <br/>
 
           {{category.description}}
-          <div class="text-muted">
+
+          <div class="text-muted" *ngIf="category.postsCount === 0 && category.usersCount === 0">
+            {{category.postsCount}} Posts by
+            {{category.usersCount}} Users
+          </div>
+
+          <div class="text-muted" *ngIf="category.postsCount === 1 && category.usersCount === 1">
+            {{category.postsCount}} Post by
+            {{category.usersCount}} User
+          </div>
+
+          <div class="text-muted" *ngIf="category.postsCount >=2 && category.usersCount === 1">
+            {{category.postsCount}} Posts by
+            {{category.usersCount}} User
+          </div>
+
+          <div class="text-muted" *ngIf="category.postsCount >=2 && category.usersCount >= 2">
             {{category.postsCount}} Posts by
             {{category.usersCount}} Users
           </div>
